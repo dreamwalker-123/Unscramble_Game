@@ -6,16 +6,12 @@ word using all the letters in the displayed scrambled word.
 This code demonstrates the Android Architecture component- ViewModel and StateFlow.
 
 
-Pre-requisites
---------------
-* Experience with Kotlin syntax.
-* How to create and run a project in Android Studio.
-* How to create composable functions 
-
-
-Getting Started
----------------
-1. Install Android Studio, if you don't already have it.
-2. Download the sample.
-3. Import the sample into Android Studio.
-4. Build and run the sample.
+what we have here:
+1) private val _uiState = MutableStateFlow(GameUiState())
+   val uiState: StateFlow<GameUiState> = _uiState.asStateFlow()
+2) var userGuess by mutableStateOf("")
+3) _uiState.update { currentState ->
+       currentState.copy(isGuessedWordWrong = true)
+   }
+4) val gameUiState by gameViewModel.uiState.collectAsState()
+5) val activity = (LocalContext.current as Activity)
